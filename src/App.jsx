@@ -1,36 +1,40 @@
 import React, { Component } from "react";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0
-    };
+  state = {
+    posts: [],
+    loading: true,
+    comments: [],
   }
 
-  increment = () => {
-    this.setState({count: this.state.count + 1});
+  componentDidMount() {
+    console.log('componentDidMount');
+      fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(data => this.setState({posts: data, loading: false}))
 
-    console.log('from handle click');
-    // this.setState ((prevState)=>({count: prevState.count + 1}));
+      this.timerId = setInterval(() => {
+        fetch('https://jsonplaceholder.typicode.com/comments')
+        .then(response => response.json())
+        .then(data => this.setState({comments: data}))
+      }, 3000);
   }
 
-  decrement = () => {
-    this.setState({count: this.state.count - 1});
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
 
-    console.log('from handle click');
-    // this.setState ((prevState)=>({count: prevState.count + 1}));
+  componentWillUnmount() {
+    clearInterval(this.timerId);
   }
 
   render() {
     return (
-    <div className="App" style={{margin: 'auto', width: '300px'}}>
-      <button onClick={this.decrement}>-</button>
-      <span style={{margin: '0 1rem', display: "inline-block"}}>{this.state.count}</span>
-      <button onClick={this.increment}>+</button>
+    <div className="App">
+      {this.state.loading ? <h3>Loading...</h3> : <h3>{this.state.posts.length} was loaded</h3>}
     </div>
     );
-  }
+  } 
 }
 
 export default App;
