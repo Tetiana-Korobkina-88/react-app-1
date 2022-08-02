@@ -10,15 +10,15 @@ class Key extends Component {
     ],
   }
 
-  handleSomething = () => {
-    console.log('Key.jsx setState updated');
+  removePost = (id) => {
+    this.setState({posts: this.state.posts.filter(post => post.id !== id)})
   }
 
   render() {
     const { posts } = this.state;
     return (
       <div className="Key">
-        <Posts posts={posts} cb={this.handleSomething} />
+        <Posts posts={posts} removePost={this.removePost} />
       </div>
     );
   }
