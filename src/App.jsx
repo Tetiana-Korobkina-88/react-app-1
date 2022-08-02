@@ -1,54 +1,12 @@
-import React, { Component } from "react";
+import { Form } from './component/Form';
 
-class App extends Component {
-  state = {
-    count: 0,
-    isCounting: false,
-  };
+function App() {
 
-  componentDidMount() {
-    const userCount = localStorage.getItem('timer');
-    if (userCount) {
-      this.setState({ count: +userCount });
-    }
-  };
-
-  componentDidUpdate() {
-    localStorage.setItem('timer', this.state.count)
-  };
-
-  componentWillUnmount() {
-    clearInterval(this.counterId);  
-  };
- 
-  handleStart = () => {
-    this.setState({ isCounting: true });
-
-    this.counterId = setInterval(() => {
-      this.setState({ count: this.state.count + 1 }); 
-    }, 1000);
-  };
-
-  handleStop = () => {
-    this.setState({isCounting: false});
-    clearInterval(this.counterId);  
-  };
-
-  handleReset = () => {
-    this.setState({isCounting: false, count: 0 });
-    clearInterval(this.counterId);  
-  };
-
-  render() {
-    return (
-    <div className="App" style={{textAlign: "center"}}>
-      <h1>React Timer</h1>
-      <h3>{this.state.count}</h3>
-      {!this.state.isCounting ? (<button onClick={this.handleStart}>Start</button>) : (<button onClick={this.handleStop}>Stop</button>)}
-      <button onClick={this.handleReset}>Reset</button>
+  return (
+    <div className='App'>
+      <Form />
     </div>
-    );
-  } 
+  )
 }
 
 export default App;
