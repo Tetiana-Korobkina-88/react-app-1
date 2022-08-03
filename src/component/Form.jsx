@@ -5,6 +5,7 @@ class Form extends Component {
     firstName: '',
     email: '',
     message: '',
+    select: '',
   }
 
   handleChange = (event) => {
@@ -24,7 +25,7 @@ class Form extends Component {
   }
 
   render() {
-    const {firstName, email, message} = this.state;
+    const {firstName, email, message, select} = this.state;
     return <div>
       <input 
         type='text' 
@@ -48,6 +49,13 @@ class Form extends Component {
         value={message}
         onChange={this.handleChange} 
       />
+      <br />
+      <select name='select' value={select} onChange={this.handleChange} >
+        <option value="" disabled></option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
     </div>
   }
 }
