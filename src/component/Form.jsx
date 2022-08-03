@@ -6,10 +6,15 @@ class Form extends Component {
     email: '',
     message: '',
     select: '',
+    subscription: false, 
   }
 
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value })
+  }
+
+  handleCheckboxChange = (event) => {
+    this.setState({[event.target.name]: event.target.checked })
   }
 
   validateName = () => {
@@ -25,7 +30,7 @@ class Form extends Component {
   }
 
   render() {
-    const {firstName, email, message, select} = this.state;
+    const {firstName, email, message, select, subscription} = this.state;
     return <div>
       <input 
         type='text' 
@@ -56,6 +61,16 @@ class Form extends Component {
         <option value="2">2</option>
         <option value="3">3</option>
       </select>
+      <br />
+      <label>
+        <input 
+          type='checkbox' 
+          name='subscription' 
+          checked={subscription}
+          onChange={this.handleCheckboxChange} 
+        />
+        Subscription
+      </label>
     </div>
   }
 }
