@@ -4,6 +4,7 @@ class Form extends Component {
   state = {
     firstName: '',
     email: '',
+    message: '',
   }
 
   handleChange = (event) => {
@@ -23,7 +24,7 @@ class Form extends Component {
   }
 
   render() {
-    const {firstName, email} = this.state;
+    const {firstName, email, message} = this.state;
     return <div>
       <input 
         type='text' 
@@ -40,6 +41,12 @@ class Form extends Component {
         value={email}
         onChange={this.handleChange}
         onBlur={this.validateEmail}
+      />
+      <br />
+      <textarea 
+        name='message' 
+        value={message}
+        onChange={this.handleChange} 
       />
     </div>
   }
